@@ -15,11 +15,9 @@ function RatingEmoji({ rating }: IRatingEmojiProps) {
     5: { src: thumbsUp, alt: "good", boxSize: "25px" },
   };
   return (
-    <>
-      <Tooltip label={`rated: ${emojiMap_[rating].alt}`} closeOnScroll={true}>
-        <Image {...emojiMap_[rating]} />
-      </Tooltip>
-    </>
+    <Tooltip label={`rated: ${emojiMap_[rating].alt}`} closeOnScroll={true}>
+      <Image {...emojiMap_[rating]} />
+    </Tooltip>
   );
 }
 

@@ -30,13 +30,9 @@ function PlatformIconList({ platform }: IPlatfromListProps) {
   return (
     <HStack>
       {platform.map((platform) => (
-        <Tooltip label={platform.slug} closeOnScroll={true} color={"white"}>
+        <Tooltip label={platform.slug} closeOnScroll={true} key={platform.id}>
           <span>
-            <Icon
-              key={platform.id}
-              as={iconMap_[platform.slug]}
-              color="gray.500"
-            />
+            <Icon as={iconMap_[platform.slug]} color="gray.500" />
           </span>
         </Tooltip>
       ))}

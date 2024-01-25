@@ -1,13 +1,13 @@
-import { Box, Center, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import Games from "./components/Games/Games";
 import GenreList from "./components/GenreList/GenreList";
-import { useState } from "react";
+import Navbar from "./components/Navbar/Navbar";
 import PlatformSelector from "./components/PlatformSelector/PlatformSelector";
-import { IGamesRequestData } from "./interfaces/interfaces";
-import SortSelctor from "./components/SortSelector/SortSelector";
 import SelectionHeading from "./components/SelectionHeading";
+import SortSelctor from "./components/SortSelector/SortSelector";
+import { IGamesRequestData } from "./interfaces/interfaces";
 
 function App() {
   // state to keep track of the selected genre and platform
@@ -33,6 +33,7 @@ function App() {
             }
           ></Navbar>
         </GridItem>
+        {/* side panel */}
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
             <GenreList
@@ -43,22 +44,13 @@ function App() {
             ></GenreList>
           </GridItem>
         </Show>
-        <GridItem area="main">
-          {/* for small screens */}
-          <Show below="md">
-            <Center>
-              <Box mb={2}>
-                <SelectionHeading selection={gameQuery_} size="small" />
-              </Box>
-            </Center>
-          </Show>
-          {/* for other views */}
-          <Show above="md">
-            <Box mb={2}>
-              <SelectionHeading selection={gameQuery_} size="large" />
-            </Box>
-          </Show>
-          <HStack pr={2} mb={2}>
+        <GridItem area="main" mx={{ base: "2", lg: "0" }}>
+          {/* app heading */}
+          <Box mb={2} textAlign={{ base: "center", md: "justify" }}>
+            <SelectionHeading selection={gameQuery_} />
+          </Box>
+          {/* dropdown filters */}
+          <Stack mb={2} direction={{ base: "column", md: "row" }}>
             <PlatformSelector
               onPlatformSelect={(platform_) =>
                 setGameQuery_({ ...gameQuery_, platform: platform_ })
@@ -71,8 +63,11 @@ function App() {
                 setGameQuery_({ ...gameQuery_, sortBy: value_ })
               }
             />
-          </HStack>
-          <Games query={gameQuery_}></Games>
+          </Stack>
+          {/* actual games */}
+          <Box>
+            <Games query={gameQuery_}></Games>
+          </Box>
         </GridItem>
       </Grid>
     </div>

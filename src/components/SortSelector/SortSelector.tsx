@@ -24,25 +24,28 @@ function SortSelctor({
         ?.label
     : sortCategories_[0].label;
   return (
-    <>
-      <Menu>
-        <MenuButton as={Button} rightIcon={<MdExpandCircleDown />}>
-          {"Order by: " + buttonLabel_}
-        </MenuButton>
-        <MenuList maxH={"500px"} minH={"100px"} overflowY={"auto"}>
-          {sortCategories_.map((category_) => (
-            <MenuItem
-              minH="40px"
-              onClick={() => onCategorySelect(category_.value)}
-              key={category_.value}
-              value={category_.value}
-            >
-              <span>{category_.label}</span>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
-    </>
+    <Menu>
+      <MenuButton as={Button} rightIcon={<MdExpandCircleDown />}>
+        {"Order by: " + buttonLabel_}
+      </MenuButton>
+      <MenuList
+        maxH={"500px"}
+        minH={"100px"}
+        overflowY={"auto"}
+        w={{ base: "300px", md: "100%" }}
+      >
+        {sortCategories_.map((category_) => (
+          <MenuItem
+            minH="40px"
+            onClick={() => onCategorySelect(category_.value)}
+            key={category_.value}
+            value={category_.value}
+          >
+            <span>{category_.label}</span>
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
   );
 }
 

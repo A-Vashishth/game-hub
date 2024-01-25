@@ -9,7 +9,7 @@ interface INavbarProps {
 
 function Navbar({ onSearch }: INavbarProps) {
   return (
-    <HStack padding="10px">
+    <HStack padding="10px" pl={{ base: "0", lg: "10px" }}>
       <Tooltip label={"Posh's Game Hub"} closeOnScroll={true}>
         <Image src={logo} boxSize={"60px"} />
       </Tooltip>

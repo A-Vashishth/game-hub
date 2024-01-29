@@ -10,22 +10,22 @@ interface IGamesProps {
 
 function Games({ query }: IGamesProps) {
   // getting the games from the custom hook
-  const { data_: games_, error_, isLoading_ } = useGames(query);
+  const { data: games_, error, isLoading } = useGames(query);
   {
-    if (error_) <Text>{error_}</Text>;
+    if (error) <Text>{error.message}</Text>;
   }
   const skeletons_ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={3}>
-        {isLoading_ &&
+        {isLoading &&
           skeletons_.map((num_) => (
             <FetchingSkeleton key={num_}></FetchingSkeleton>
           ))}
-        {games_.map((game_) => (
+        {games_?.results?.map((game_) => (
           <GameCard key={game_.id} game={game_}></GameCard>
         ))}
-        {games_.length === 0 && (
+        {games_?.results?.length === 0 && (
           <Text>Oh no Seems like there are no Games to display!</Text>
         )}
       </SimpleGrid>

@@ -10,9 +10,9 @@ export interface IGenreData {
   name: string;
   image_background: string;
 }
-//  interface for the fetched data from RAWG api
-export interface IFetchGamesResponse {
-  results: Array<IGameData>;
+// interface for the fetched data from RAWG api
+export interface IFetchGamesResponse<T> {
+  results: Array<T>;
   count: number;
 }
 // interface for data related for each game

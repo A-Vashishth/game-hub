@@ -18,11 +18,11 @@ interface IGenreListProps {
 }
 
 function GenreList({ onGenreSelect, selectedGenre }: IGenreListProps) {
-  const { data_: genre_, isLoading_, error_ } = useGenres();
+  const { data: genre_, isLoading, error } = useGenres();
   //   incase of error let user know
-  if (error_) return <Text>Oops Something Went Wrong! :(</Text>;
+  if (error) return <Text>Oops Something Went Wrong! :(</Text>;
   // in case of loading show spinner
-  if (isLoading_)
+  if (isLoading)
     return (
       <Spinner
         thickness="4px"
@@ -36,11 +36,10 @@ function GenreList({ onGenreSelect, selectedGenre }: IGenreListProps) {
   return (
     <>
       <Heading fontSize={"2xl"} mb={3}>
-        {" "}
-        Genres{" "}
+        Genres
       </Heading>
       <List>
-        {genre_.map((genre) => (
+        {genre_?.results?.map((genre) => (
           <ListItem key={genre.id} paddingY={2}>
             <HStack>
               <Image

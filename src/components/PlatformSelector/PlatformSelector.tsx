@@ -20,7 +20,7 @@ function PlatformSelector({
   selectedPlatform,
 }: IPlatformSelectProps) {
   //  to fetch the list of all the platforms
-  const { data_: platforms_, error_ } = usePlatforms();
+  const { data: platforms_, error } = usePlatforms();
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<MdExpandCircleDown />}>
@@ -32,8 +32,8 @@ function PlatformSelector({
         overflowY={"auto"}
         w={{ base: "300px", md: "100%" }}
       >
-        {error_ && <Text>Oops somthing went wrong!</Text>}
-        {platforms_.map((platform_) => (
+        {error && <Text>Oops somthing went wrong!</Text>}
+        {platforms_?.results?.map((platform_) => (
           <MenuItem
             minH="40px"
             key={platform_.id + "platform_menu_item"}

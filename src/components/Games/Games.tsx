@@ -1,8 +1,9 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard/GameCard";
 import FetchingSkeleton from "../FetchingSkeleton/FetchingSkeleton";
 import { IGamesRequestData } from "../../interfaces/interfaces";
+import React from "react";
 
 interface IGamesProps {
   query: IGamesRequestData;
@@ -10,7 +11,14 @@ interface IGamesProps {
 
 function Games({ query }: IGamesProps) {
   // getting the games from the custom hook
-  const { data: games_, error, isLoading } = useGames(query);
+  const {
+    data: games_,
+    error,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGames(query);
   {
     if (error) <Text>{error.message}</Text>;
   }
@@ -22,13 +30,19 @@ function Games({ query }: IGamesProps) {
           skeletons_.map((num_) => (
             <FetchingSkeleton key={num_}></FetchingSkeleton>
           ))}
-        {games_?.results?.map((game_) => (
-          <GameCard key={game_.id} game={game_}></GameCard>
+        {games_?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page?.results?.map((game_) => (
+              <GameCard key={game_.id} game={game_}></GameCard>
+            ))}
+          </React.Fragment>
         ))}
-        {games_?.results?.length === 0 && (
-          <Text>Oh no Seems like there are no Games to display!</Text>
-        )}
       </SimpleGrid>
+      {hasNextPage && (
+        <Button onClick={() => fetchNextPage()} my={5}>
+          {isFetchingNextPage ? "fetching games.." : "more games.."}
+        </Button>
+      )}
     </>
   );
 }

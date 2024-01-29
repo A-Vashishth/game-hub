@@ -14,6 +14,7 @@ export interface IGenreData {
 export interface IFetchGamesResponse<T> {
   results: Array<T>;
   count: number;
+  next: string | null;
 }
 // interface for data related for each game
 export interface IGameData {

@@ -20,8 +20,9 @@ function PlatformSelector({
   onPlatformSelect,
   selectedPlatformId,
 }: Readonly<IPlatformSelectProps>) {
-  //  to fetch the list of all the platforms
+  //  to fetch the list of all the platforms using useQuery
   const { data: platforms_, error } = usePlatforms();
+  // fetching the name of selected platform from the id recieved
   const selectedPlatformName_ = useFindPlatform(selectedPlatformId);
   return (
     <Menu>

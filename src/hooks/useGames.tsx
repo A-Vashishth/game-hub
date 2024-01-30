@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { IGameData, IGamesRequestData } from "../interfaces/interfaces";
 import APIClient from "../services/api-client";
+import ms from "ms";
 
 const gamesEndpoint_ = "/games";
 const apiClientInstance_ = new APIClient<IGameData>(gamesEndpoint_);
@@ -22,7 +23,7 @@ const useGames = (query: IGamesRequestData) => {
       return lastpage.next ? allpages.length + 1 : undefined;
     },
     initialPageParam: 1,
-    staleTime: 24 * 60 * 60 * 1000, // 24hr
+    staleTime: ms("24h"),
   });
 };
 

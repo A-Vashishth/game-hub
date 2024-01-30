@@ -22,6 +22,7 @@ const useGames = (query: IGamesRequestData) => {
       return lastpage.next ? allpages.length + 1 : undefined;
     },
     initialPageParam: 1,
+    staleTime: 24 * 60 * 60 * 1000, // 24hr
   });
 };
 

@@ -12,6 +12,6 @@ export default function useGenres() {
     queryKey: ["genres"],
     queryFn: () => apiClientInstance_.getAll(),
     staleTime: 24 * 60 * 60 * 1000, // 24hr
-    initialData: { count: genreData.length, results: genreData },
+    initialData: { count: genreData.length, results: genreData, next: null },
   });
 }

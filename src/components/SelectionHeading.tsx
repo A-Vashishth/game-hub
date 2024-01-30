@@ -1,4 +1,6 @@
 import { Heading } from "@chakra-ui/react";
+import useFindGenre from "../hooks/useFindGenre";
+import useFindPlatform from "../hooks/useFindPlatform";
 import { IGamesRequestData } from "../interfaces/interfaces";
 
 interface ISelectionHeadingProps {
@@ -6,9 +8,9 @@ interface ISelectionHeadingProps {
 }
 
 function SelectionHeading({ selection }: ISelectionHeadingProps) {
-  const heading_ = `${selection?.platform?.name ?? ""} ${
-    selection?.genre?.name ?? ""
-  } Games`;
+  const platformName_ = useFindPlatform(selection?.platformId);
+  const genreName_ = useFindGenre(selection?.genreId);
+  const heading_ = `${platformName_ ?? ""} ${genreName_ ?? ""} Games`;
   return <Heading fontSize={{ base: "3xl", md: "5xl" }}>{heading_}</Heading>;
 }
 

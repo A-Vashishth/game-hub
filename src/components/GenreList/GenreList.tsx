@@ -14,10 +14,10 @@ import { IGenreData } from "../../interfaces/interfaces";
 
 interface IGenreListProps {
   onGenreSelect: (genre: IGenreData) => void;
-  selectedGenre: IGenreData | null;
+  selectedGenreId: number | undefined;
 }
 
-function GenreList({ onGenreSelect, selectedGenre }: IGenreListProps) {
+function GenreList({ onGenreSelect, selectedGenreId }: IGenreListProps) {
   const { data: genre_, isLoading, error } = useGenres();
   //   incase of error let user know
   if (error) return <Text>Oops Something Went Wrong! :(</Text>;
@@ -51,8 +51,8 @@ function GenreList({ onGenreSelect, selectedGenre }: IGenreListProps) {
               <Button
                 variant="link"
                 fontSize="lg"
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : ""}
-                backgroundColor={genre.id === selectedGenre?.id ? "gray" : ""}
+                fontWeight={genre.id === selectedGenreId ? "bold" : ""}
+                backgroundColor={genre.id === selectedGenreId ? "gray" : ""}
                 onClick={() => onGenreSelect(genre)}
                 px={2}
                 whiteSpace={"normal"}

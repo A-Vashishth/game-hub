@@ -38,9 +38,9 @@ function App() {
           <GridItem area="aside" paddingX={5}>
             <GenreList
               onGenreSelect={(genre_) =>
-                setGameQuery_({ ...gameQuery_, genre: genre_ })
+                setGameQuery_({ ...gameQuery_, genreId: genre_?.id })
               }
-              selectedGenre={gameQuery_.genre}
+              selectedGenreId={gameQuery_.genreId}
             ></GenreList>
           </GridItem>
         </Show>
@@ -53,9 +53,9 @@ function App() {
           <Stack mb={2} direction={{ base: "column", md: "row" }}>
             <PlatformSelector
               onPlatformSelect={(platform_) =>
-                setGameQuery_({ ...gameQuery_, platform: platform_ })
+                setGameQuery_({ ...gameQuery_, platformId: platform_?.id })
               }
-              selectedPlatform={gameQuery_.platform}
+              selectedPlatformId={gameQuery_.platformId}
             />
             <SortSelctor
               sortByValue={gameQuery_.sortBy}

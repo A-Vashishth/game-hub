@@ -26,28 +26,26 @@ function Games({ query }: IGamesProps) {
   const totalFetchedResults_ =
     games_?.pages.reduce((total, page) => total + page?.results.length, 0) ?? 0;
   return (
-    <>
-      <InfiniteScroll
-        dataLength={totalFetchedResults_}
-        hasMore={hasNextPage}
-        loader={<Spinner />}
-        next={() => fetchNextPage()}
-      >
-        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={3}>
-          {isLoading &&
-            skeletons_.map((num_) => (
-              <FetchingSkeleton key={num_}></FetchingSkeleton>
-            ))}
-          {games_?.pages.map((page, index) => (
-            <React.Fragment key={index}>
-              {page?.results?.map((game_) => (
-                <GameCard key={game_.id} game={game_}></GameCard>
-              ))}
-            </React.Fragment>
+    <InfiniteScroll
+      dataLength={totalFetchedResults_}
+      hasMore={hasNextPage}
+      loader={<Spinner />}
+      next={() => fetchNextPage()}
+    >
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={3}>
+        {isLoading &&
+          skeletons_.map((num_) => (
+            <FetchingSkeleton key={num_}></FetchingSkeleton>
           ))}
-        </SimpleGrid>
-      </InfiniteScroll>
-    </>
+        {games_?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page?.results?.map((game_) => (
+              <GameCard key={game_.id} game={game_}></GameCard>
+            ))}
+          </React.Fragment>
+        ))}
+      </SimpleGrid>
+    </InfiniteScroll>
   );
 }
 

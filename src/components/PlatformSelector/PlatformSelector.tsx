@@ -7,24 +7,26 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdExpandCircleDown } from "react-icons/md";
+import useFindPlatform from "../../hooks/useFindPlatform";
 import usePlatforms from "../../hooks/usePlatform";
 import { IPlatformData } from "../../interfaces/interfaces";
 
 interface IPlatformSelectProps {
   onPlatformSelect: (platform: IPlatformData) => void;
-  selectedPlatform: IPlatformData | null;
+  selectedPlatformId: number | undefined;
 }
 
 function PlatformSelector({
   onPlatformSelect,
-  selectedPlatform,
-}: IPlatformSelectProps) {
+  selectedPlatformId,
+}: Readonly<IPlatformSelectProps>) {
   //  to fetch the list of all the platforms
   const { data: platforms_, error } = usePlatforms();
+  const selectedPlatformName_ = useFindPlatform(selectedPlatformId);
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<MdExpandCircleDown />}>
-        {selectedPlatform?.name ?? "Platforms"}
+        {selectedPlatformName_ ?? "platforms"}
       </MenuButton>
       <MenuList
         maxH={"500px"}
@@ -36,7 +38,7 @@ function PlatformSelector({
         {platforms_?.results?.map((platform_) => (
           <MenuItem
             minH="40px"
-            key={platform_.id + "platform_menu_item"}
+            key={platform_.name}
             onClick={() => onPlatformSelect(platform_)}
           >
             <span>{platform_.name}</span>

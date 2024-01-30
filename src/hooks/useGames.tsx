@@ -11,8 +11,8 @@ const useGames = (query: IGamesRequestData) => {
     queryFn: ({ pageParam = 1 }) =>
       apiClientInstance_.getAll({
         params: {
-          genres: query?.genre?.id,
-          parent_platforms: query?.platform?.id,
+          genres: query?.genreId,
+          parent_platforms: query?.platformId,
           ordering: query?.sortBy,
           search: query?.searchText,
           page: pageParam,

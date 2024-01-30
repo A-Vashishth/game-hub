@@ -27,8 +27,8 @@ export interface IGameData {
 }
 // interface to store meta data for fetching the specific type of games
 export interface IGamesRequestData {
-  genre: IGenreData | null;
-  platform: IPlatformData | null;
+  genreId?: number;
+  platformId?: number;
   sortBy: string;
   searchText: string;
 }

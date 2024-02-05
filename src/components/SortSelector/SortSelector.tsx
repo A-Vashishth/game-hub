@@ -1,15 +1,8 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MdExpandCircleDown } from "react-icons/md";
+import useGameQueryStore from "../../Stores/queryStore";
 
-interface ISortSelectProps {
-  sortByValue: string | null;
-  onCategorySelect: (value: string) => void;
-}
-
-function SortSelctor({
-  sortByValue = null,
-  onCategorySelect,
-}: ISortSelectProps) {
+function SortSelctor() {
   //  to fetch the list of all the platforms
   const sortCategories_ = [
     { value: "", label: "Relevance" },
@@ -19,8 +12,11 @@ function SortSelctor({
     { value: "-metacritic", label: "Popularity" },
     { value: "-rating", label: "Average Rating" },
   ];
-  const buttonLabel_ = sortByValue
-    ? sortCategories_.filter((category_) => category_.value === sortByValue)[0]
+  const sortByValue_ = useGameQueryStore((s) => s.gameQuery.sortBy);
+  const setSortByValue_ = useGameQueryStore((s) => s.setSortOrder);
+
+  const buttonLabel_ = sortByValue_
+    ? sortCategories_.filter((category_) => category_.value === sortByValue_)[0]
         ?.label
     : sortCategories_[0].label;
   return (
@@ -37,7 +33,7 @@ function SortSelctor({
         {sortCategories_.map((category_) => (
           <MenuItem
             minH="40px"
-            onClick={() => onCategorySelect(category_.value)}
+            onClick={() => setSortByValue_(category_.value)}
             key={category_.value}
             value={category_.value}
           >

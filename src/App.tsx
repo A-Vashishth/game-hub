@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
-import { useState } from "react";
 import "./App.css";
 import Games from "./components/Games/Games";
 import GenreList from "./components/GenreList/GenreList";
@@ -7,13 +6,8 @@ import Navbar from "./components/Navbar/Navbar";
 import PlatformSelector from "./components/PlatformSelector/PlatformSelector";
 import SelectionHeading from "./components/SelectionHeading";
 import SortSelctor from "./components/SortSelector/SortSelector";
-import { IGamesRequestData } from "./interfaces/interfaces";
 
 function App() {
-  // state to keep track of the selected genre and platform
-  const [gameQuery_, setGameQuery_] = useState<IGamesRequestData>(
-    {} as IGamesRequestData
-  );
   return (
     <div className="app-container">
       <Grid
@@ -27,46 +21,27 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <Navbar
-            onSearch={(value) =>
-              setGameQuery_({ ...gameQuery_, searchText: value })
-            }
-          ></Navbar>
+          <Navbar></Navbar>
         </GridItem>
         {/* side panel */}
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
-            <GenreList
-              onGenreSelect={(genre_) =>
-                setGameQuery_({ ...gameQuery_, genreId: genre_?.id })
-              }
-              selectedGenreId={gameQuery_.genreId}
-            ></GenreList>
+            <GenreList></GenreList>
           </GridItem>
         </Show>
         <GridItem area="main" mx={{ base: "2", lg: "0" }}>
           {/* app heading */}
           <Box mb={2} textAlign={{ base: "center", md: "justify" }}>
-            <SelectionHeading selection={gameQuery_} />
+            <SelectionHeading />
           </Box>
           {/* dropdown filters */}
           <Stack mb={2} direction={{ base: "column", md: "row" }}>
-            <PlatformSelector
-              onPlatformSelect={(platform_) =>
-                setGameQuery_({ ...gameQuery_, platformId: platform_?.id })
-              }
-              selectedPlatformId={gameQuery_.platformId}
-            />
-            <SortSelctor
-              sortByValue={gameQuery_.sortBy}
-              onCategorySelect={(value_) =>
-                setGameQuery_({ ...gameQuery_, sortBy: value_ })
-              }
-            />
+            <PlatformSelector />
+            <SortSelctor />
           </Stack>
           {/* actual games */}
           <Box>
-            <Games query={gameQuery_}></Games>
+            <Games></Games>
           </Box>
         </GridItem>
       </Grid>

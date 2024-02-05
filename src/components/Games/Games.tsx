@@ -2,15 +2,10 @@ import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useGames from "../../hooks/useGames";
-import { IGamesRequestData } from "../../interfaces/interfaces";
 import FetchingSkeleton from "../FetchingSkeleton/FetchingSkeleton";
 import GameCard from "../GameCard/GameCard";
 
-interface IGamesProps {
-  query: IGamesRequestData;
-}
-
-function Games({ query }: IGamesProps) {
+function Games() {
   // getting the games from the custom hook
   const {
     data: games_,
@@ -18,7 +13,7 @@ function Games({ query }: IGamesProps) {
     isLoading,
     hasNextPage,
     fetchNextPage,
-  } = useGames(query);
+  } = useGames();
   {
     if (error) <Text>{error.message}</Text>;
   }

@@ -1,14 +1,11 @@
 import { Heading } from "@chakra-ui/react";
 import useFindGenre from "../hooks/useFindGenre";
 import useFindPlatform from "../hooks/useFindPlatform";
-import { IGamesRequestData } from "../interfaces/interfaces";
+import useGameQueryStore from "../Stores/queryStore";
 
-interface ISelectionHeadingProps {
-  selection: IGamesRequestData | null;
-}
-
-function SelectionHeading({ selection }: Readonly<ISelectionHeadingProps>) {
+function SelectionHeading() {
   // fetching appropriate info for heading to display
+  const selection = useGameQueryStore((s) => s.gameQuery);
   const platformName_ = useFindPlatform(selection?.platformId);
   const genreName_ = useFindGenre(selection?.genreId);
   // formulating heading

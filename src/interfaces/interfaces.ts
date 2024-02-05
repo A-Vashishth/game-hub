@@ -29,6 +29,6 @@ export interface IGameData {
 export interface IGamesRequestData {
   genreId?: number;
   platformId?: number;
-  sortBy: string;
-  searchText: string;
+  sortBy?: string;
+  searchText?: string;
 }

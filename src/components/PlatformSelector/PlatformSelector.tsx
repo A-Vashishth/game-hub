@@ -7,23 +7,18 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdExpandCircleDown } from "react-icons/md";
+import useGameQueryStore from "../../Stores/queryStore";
 import useFindPlatform from "../../hooks/useFindPlatform";
 import usePlatforms from "../../hooks/usePlatform";
-import { IPlatformData } from "../../interfaces/interfaces";
 
-interface IPlatformSelectProps {
-  onPlatformSelect: (platform: IPlatformData) => void;
-  selectedPlatformId: number | undefined;
-}
-
-function PlatformSelector({
-  onPlatformSelect,
-  selectedPlatformId,
-}: Readonly<IPlatformSelectProps>) {
+function PlatformSelector() {
   //  to fetch the list of all the platforms using useQuery
   const { data: platforms_, error } = usePlatforms();
+  const selectedPlatformId_ = useGameQueryStore((s) => s.gameQuery.platformId);
+  const setSelectedPlatform_ = useGameQueryStore((s) => s.updatePlatformId);
+
   // fetching the name of selected platform from the id recieved
-  const selectedPlatformName_ = useFindPlatform(selectedPlatformId);
+  const selectedPlatformName_ = useFindPlatform(selectedPlatformId_);
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<MdExpandCircleDown />}>
@@ -40,7 +35,7 @@ function PlatformSelector({
           <MenuItem
             minH="40px"
             key={platform_.name}
-            onClick={() => onPlatformSelect(platform_)}
+            onClick={() => setSelectedPlatform_(platform_.id)}
           >
             <span>{platform_.name}</span>
           </MenuItem>

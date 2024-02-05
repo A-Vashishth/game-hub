@@ -1,26 +1,23 @@
 import {
+  Button,
   HStack,
+  Heading,
+  Image,
   List,
   ListItem,
-  Image,
-  Text,
   Spinner,
-  Button,
-  Heading,
+  Text,
 } from "@chakra-ui/react";
+import useGameQueryStore from "../../Stores/queryStore";
 import useGenres from "../../hooks/useGenres";
 import getCroppedImageUrl from "../../services/image-cropper";
-import { IGenreData } from "../../interfaces/interfaces";
 
-interface IGenreListProps {
-  onGenreSelect: (genre: IGenreData) => void;
-  selectedGenreId: number | undefined;
-}
-
-function GenreList({ onGenreSelect, selectedGenreId }: IGenreListProps) {
+function GenreList() {
+  const selectedGenreId_ = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setSelectedGenreId_ = useGameQueryStore((s) => s.updateGenreId);
   const { data: genre_, isLoading, error } = useGenres();
   //   incase of error let user know
-  if (error) return <Text>Oops Something Went Wrong! :(</Text>;
+  if (error) return <Text>"Oops Something Went Wrong! :("</Text>;
   // in case of loading show spinner
   if (isLoading)
     return (
@@ -51,9 +48,9 @@ function GenreList({ onGenreSelect, selectedGenreId }: IGenreListProps) {
               <Button
                 variant="link"
                 fontSize="lg"
-                fontWeight={genre.id === selectedGenreId ? "bold" : ""}
-                backgroundColor={genre.id === selectedGenreId ? "gray" : ""}
-                onClick={() => onGenreSelect(genre)}
+                fontWeight={genre.id === selectedGenreId_ ? "bold" : ""}
+                backgroundColor={genre.id === selectedGenreId_ ? "gray" : ""}
+                onClick={() => setSelectedGenreId_(genre.id)}
                 px={2}
                 whiteSpace={"normal"}
                 textAlign={"left"}

@@ -13,7 +13,7 @@ import { HStack, Icon, Tooltip } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface IPlatfromListProps {
-  platform: IPlatformData[];
+  platform: IPlatformData[] | undefined;
 }
 
 function PlatformIconList({ platform }: IPlatfromListProps) {
@@ -29,7 +29,7 @@ function PlatformIconList({ platform }: IPlatfromListProps) {
   };
   return (
     <HStack>
-      {platform.map((platform) => (
+      {platform?.map((platform) => (
         <Tooltip label={platform.slug} closeOnScroll={true} key={platform.id}>
           <span>
             <Icon as={iconMap_[platform.slug]} color="gray.500" />

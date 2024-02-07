@@ -24,6 +24,7 @@ interface IGameCardProps {
 
 function GameCard({ game }: IGameCardProps) {
   const navigate_ = useNavigate();
+  // console.log(`${game.name}:${[...game.parent_platforms]}`);
   function openGameDetails(slug: string) {
     navigate_(`/details/${slug}`);
   }
@@ -32,8 +33,6 @@ function GameCard({ game }: IGameCardProps) {
       variant={"elevated"}
       _hover={{
         boxShadow: "gray 0px 10px 20px, gray 0px 6px 6px",
-        transform: "scale(1)",
-        transition: "transform 0.15s",
       }}
       onClick={() => openGameDetails(game.slug)}
     >
@@ -50,9 +49,10 @@ function GameCard({ game }: IGameCardProps) {
           <Divider />
           <HStack justifyContent={"space-between"}>
             <PlatformIconList
-              platform={game.parent_platforms.map(
-                (platform) => platform.platform
-              )}
+              platform={
+                game?.parent_platforms?.map((platform) => platform.platform) ??
+                undefined
+              }
             />
             <GameScore criticScore={game.metacritic}></GameScore>
           </HStack>

@@ -27,7 +27,11 @@ function Games() {
       loader={<Spinner />}
       next={() => fetchNextPage()}
     >
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={3}>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={3}
+        mx={{ base: 0, lg: 2 }}
+      >
         {isLoading &&
           skeletons_.map((num_) => (
             <FetchingSkeleton key={num_}></FetchingSkeleton>

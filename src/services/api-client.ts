@@ -16,4 +16,10 @@ export default class APIClient<T> {
       .get<IFetchGamesResponse<T>>(this._endpoint, queryParams)
       .then((res_) => res_.data);
   };
+
+  public get = (id: string | number) => {
+    return axiosInstance_
+      .get<T>(this._endpoint + "/" + id)
+      .then((res_) => res_.data);
+  };
 }

@@ -20,7 +20,9 @@ export interface IFetchGamesResponse<T> {
 export interface IGameData {
   id: number;
   name: string;
+  slug: string;
   background_image: string;
+  description_raw: string;
   parent_platforms: { platform: IPlatformData }[];
   metacritic: number;
   rating_top: number;

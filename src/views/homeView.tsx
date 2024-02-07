@@ -1,28 +1,23 @@
-import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
-import "./App.css";
-import Games from "./components/Games/Games";
-import GenreList from "./components/GenreList/GenreList";
-import Navbar from "./components/Navbar/Navbar";
-import PlatformSelector from "./components/PlatformSelector/PlatformSelector";
-import SelectionHeading from "./components/SelectionHeading";
-import SortSelctor from "./components/SortSelector/SortSelector";
+import { Box, Grid, Show, GridItem, Stack } from "@chakra-ui/react";
+import Games from "../components/Games/Games";
+import GenreList from "../components/GenreList/GenreList";
+import PlatformSelector from "../components/PlatformSelector/PlatformSelector";
+import SelectionHeading from "../components/SelectionHeading";
+import SortSelctor from "../components/SortSelector/SortSelector";
 
-function App() {
+function HomeView() {
   return (
-    <div className="app-container">
+    <div className="home-container">
       <Grid
         templateAreas={{
-          base: `'nav' 'main'`,
-          lg: `'nav nav' 'aside main' `,
+          base: `'main'`,
+          lg: `'aside main'`,
         }}
         templateColumns={{
           base: "1fr",
           lg: "250px 1fr",
         }}
       >
-        <GridItem area="nav">
-          <Navbar></Navbar>
-        </GridItem>
         {/* side panel */}
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
@@ -49,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomeView;

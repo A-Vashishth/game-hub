@@ -22,7 +22,7 @@ function SearchGames() {
         </InputLeftElement>
         <Input
           borderRadius={20}
-          placeholder="What do you feel like playing today Posh? ..."
+          placeholder="What do you feel like playing today? ..."
           variant={"field"}
           ref={searchBarRef_}
         ></Input>

@@ -10,6 +10,7 @@ import {
   Image,
   Text,
   HStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import { IGameData } from "../../interfaces/interfaces";
 import PlatformIconList from "../PlatformIconList";
@@ -22,9 +23,8 @@ interface IGameCardProps {
   game: IGameData;
 }
 
-function GameCard({ game }: IGameCardProps) {
+function GameCard({ game }: Readonly<IGameCardProps>) {
   const navigate_ = useNavigate();
-  // console.log(`${game.name}:${[...game.parent_platforms]}`);
   function openGameDetails(slug: string) {
     navigate_(`/details/${slug}`);
   }
@@ -32,7 +32,8 @@ function GameCard({ game }: IGameCardProps) {
     <Card
       variant={"elevated"}
       _hover={{
-        boxShadow: "gray 0px 10px 20px, gray 0px 6px 6px",
+        boxShadow: "gray 0px 2px 4px 0px, gray 0px 2px 16px 0px",
+        cursor: "pointer",
       }}
       onClick={() => openGameDetails(game.slug)}
     >
@@ -67,12 +68,16 @@ function GameCard({ game }: IGameCardProps) {
       </CardBody>
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Button variant="solid" colorScheme="blue">
-            Buy now
-          </Button>
-          <Button variant="ghost" colorScheme="blue">
-            Add to cart
-          </Button>
+          <Tooltip label={"coming soon..."} closeOnScroll={true}>
+            <Button variant="solid" colorScheme="blue" cursor={"not-allowed"}>
+              Buy now
+            </Button>
+          </Tooltip>
+          <Tooltip label={"coming soon..."} closeOnScroll={true}>
+            <Button variant="ghost" colorScheme="blue" cursor={"not-allowed"}>
+              Add to cart
+            </Button>
+          </Tooltip>
         </ButtonGroup>
       </CardFooter>
     </Card>

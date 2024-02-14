@@ -10,17 +10,38 @@ export interface IGenreData {
   name: string;
   image_background: string;
 }
+// data for the trailers of the game
+export interface IGameTrailerData {
+  id: number;
+  name: string;
+  preview: string;
+  data: { 480: string; max: string };
+}
+// data for the screenshots of the games
+export interface IGameScreenshotData {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
+}
 // interface for the fetched data from RAWG api
 export interface IFetchGamesResponse<T> {
   results: Array<T>;
   count: number;
   next: string | null;
 }
+// for the information about the publisher of the game
+export interface IGamePublisherData {
+  id: number;
+  name: string;
+}
 // interface for data related for each game
 export interface IGameData {
   id: number;
   name: string;
   slug: string;
+  genres: IGenreData[];
+  publishers: IGamePublisherData[];
   background_image: string;
   description_raw: string;
   parent_platforms: { platform: IPlatformData }[];
